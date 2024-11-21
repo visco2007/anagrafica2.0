@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<head>
+    <title>Anagrafica 2.0</title>
+    <link rel="stylesheet" href="styleanagrafica2.0.css">
+</head>
+<body onload="refreshTable()">
+    <h1>Anagrafica 2.0</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Cognome</th>
+                <th>Indirizzo</th>
+                <th>Città</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody id="tabella">
+        </tbody>
+    </table>
+    <br>
+    <a href="Anagrafica2.0.html">Torna all'inserimento dati</a>
+
+    <script>
+        function refreshTable() {
+            const counter = parseInt(localStorage.getItem("counter")) || 0
+
+            for (let i = 1; i <= counter; i++) {
+                const user = localStorage.getItem("user" + i)
+                if (user) {
+                    const userData = user.split(",") 
+                    const tableRow = document.createElement("tr")
+
+                    userData.forEach(data => {
+                        const tableCell = document.createElement("td")
+                        tableCell.innerHTML = data
+                        tableRow.appendChild(tableCell)
+                    })
+
+
+                    document.getElementById("tabella").appendChild(tableRow)
+                }
+            }
+        }
+    </script>
+</body>
+</html>

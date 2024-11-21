@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<head>
+    <title>Anagrafica 2.0</title>
+    <link rel="stylesheet" href="styleanagrafica2.0.css">
+</head>
+<body onload="cancellaCronologia()">
+    <form>
+        <div class="mb-3 bg">
+            <h1>Anagrafica 2.0</h1>
+            <br>
+            <input class="form-control" type="text" id="nome" placeholder="Nome">
+            <br>
+            <input class="form-control" type="text" id="cognome" placeholder="Cognome">
+            <br>
+            <input class="form-control" type="text" id="indirizzo" placeholder="Indirizzo">
+            <br>
+            <input class="form-control" type="text" id="citta" placeholder="Città">
+            <br>
+            <input class="form-control" type="text" id="email" placeholder="Email">
+            <br>
+            <input type="button" value="Inserisci" onclick="createUser()">
+        </div>
+    </form>
+    <br>
+    <a href="tabella.html">Vai alla tabella</a>
+
+    <script>
+        const users = []
+
+        let iter = 1
+
+        function pushUsers(nome, cognome, indirizzo, citta, email) {
+            const user = []
+            user.push(nome)
+            user.push(cognome)
+            user.push(indirizzo)
+            user.push(citta)
+            user.push(email)
+
+            users.push(user)
+        }
+
+        function createUser() {
+            pushUsers(
+                document.getElementById("nome").value,
+                document.getElementById("cognome").value,
+                document.getElementById("indirizzo").value,
+                document.getElementById("citta").value,
+                document.getElementById("email").value
+            )
+            localStorage.setItem("user" + iter, users[users.length - 1].join(","))
+            localStorage.setItem("counter", iter)
+            iter++
+
+            document.getElementById("nome").value = ""
+            document.getElementById("cognome").value = ""
+            document.getElementById("indirizzo").value = ""
+            document.getElementById("citta").value = ""
+            document.getElementById("email").value = ""
+        }
+
+        function cancellaCronologia() {
+            localStorage.clear()
+        }
+    </script>
+</body>
+</html>
